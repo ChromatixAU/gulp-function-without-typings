@@ -1,0 +1,35 @@
+{
+  "name": "gulp-function",
+  "version": "2.2.10",
+  "description": "accepts a function call as parameter to execute in gulp pipeline",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "(npmts)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/pushrocks/gulp-function.git"
+  },
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "function"
+  ],
+  "author": "Lossless GmbH <office@lossless.com> (https://lossless.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/pushrocks/gulp-function/issues"
+  },
+  "homepage": "https://gitlab.com/pushrocks/gulp-function",
+  "dependencies": {
+    "@types/through2": "^2.0.32",
+    "through2": "^2.0.3",
+    "typings-global": "^1.0.16"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "smartgulp": "^1.0.1",
+    "tapbundle": "^1.0.10"
+  }
+}
