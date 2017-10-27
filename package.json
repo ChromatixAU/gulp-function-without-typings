@@ -1,6 +1,6 @@
 {
   "name": "gulp-function-without-typings",
-  "version": "2.2.10",
+  "version": "1.3.6",
   "description": "Accepts a function call as parameter to execute in gulp pipeline. This is a fork of gulp-function, without the @types dependencies.",
   "main": "dist/index.js",
   "repository": {
@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/ChromatixAU/gulp-function-without-typings",
   "dependencies": {
-    "through2": "^2.0.3"
+    "q": "^1.4.1",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
   }

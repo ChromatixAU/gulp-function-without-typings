@@ -1,58 +1,55 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const through2 = require("through2");
-let defaultExport = (functionsToExecuteArg, executionModeArg = 'forEach') => {
-    let promiseArray = [];
-    let runFunction = function (functionArg, file, enc) {
-        let returnValue = functionArg(file, enc);
-        if (typeof returnValue !== 'undefined' && typeof returnValue.then !== 'undefined') {
+var plugins = require("./gulpfunction.plugins");
+module.exports = function (functionsToExecuteArg, executionModeArg) {
+    if (executionModeArg === void 0) { executionModeArg = 'forEach'; }
+    //important vars
+    var executionMode = executionModeArg; //can be forEach or atEnd
+    var functionsToExecute = functionsToExecuteArg;
+    var promiseArray = [];
+    var runFunction = function (functionArg) {
+        var returnValue = functionArg();
+        if (typeof returnValue !== "undefined" && typeof returnValue.then !== "undefined") {
             promiseArray.push(returnValue);
         }
     };
-    let checkAndRunFunction = function (file, enc) {
-        if (typeof functionsToExecuteArg === 'function') {
-            runFunction(functionsToExecuteArg, file, enc);
+    var checkAndRunFunction = function () {
+        if (typeof functionsToExecute === "function") {
+            runFunction(functionsToExecute);
         }
-        else if (Array.isArray(functionsToExecuteArg)) {
-            for (let anyFunction in functionsToExecuteArg) {
-                runFunction(functionsToExecuteArg[anyFunction], file, enc);
+        else if (Array.isArray(functionsToExecute)) {
+            for (var anyFunction in functionsToExecute) {
+                runFunction(functionsToExecute[anyFunction]);
             }
         }
         else {
-            throw new Error('gulp-callfunction: something is strange with the given arguments');
+            throw new Error("gulp-callfunction: something is strange with the given arguments");
         }
-        return Promise.all(promiseArray);
+        return plugins.Q.all(promiseArray);
     };
-    let hasExecutedOnce = false;
-    let forEach = function (file, enc, cb) {
-        switch (executionModeArg) {
-            case 'forEach':
-                checkAndRunFunction(file, enc).then(function () {
+    var hasExecutedOnce = false;
+    var forEach = function (file, enc, cb) {
+        switch (executionMode) {
+            case "forEach":
+                checkAndRunFunction().then(function () {
                     cb(null, file);
                 });
                 break;
-            case 'forFirst':
-                if (hasExecutedOnce) {
-                    checkAndRunFunction(file, enc)
-                        .then(function () {
-                        cb(null, file);
-                    });
-                }
-                else {
+            case "forFirst":
+                !hasExecutedOnce ? checkAndRunFunction().then(function () {
                     cb(null, file);
-                }
+                }) : cb(null, file);
                 hasExecutedOnce = true;
                 break;
-            case 'atEnd':
-                cb();
+            case "atEnd":
+                cb(null, file);
                 break;
             default:
                 break;
         }
     };
-    let atEnd = function (cb) {
-        if (executionModeArg === 'atEnd') {
-            checkAndRunFunction(null, null).then(function () {
+    var atEnd = function (cb) {
+        if (executionMode === "atEnd") {
+            checkAndRunFunction().then(function () {
                 cb();
             });
         }
@@ -60,15 +57,5 @@ let defaultExport = (functionsToExecuteArg, executionModeArg = 'forEach') => {
             cb();
         }
     };
-    return through2.obj(forEach, atEnd);
+    return plugins.through2.obj(forEach, atEnd);
 };
-exports.forEach = (funcArg) => {
-    return defaultExport(funcArg, 'forEach');
-};
-exports.forFirst = (funcArg) => {
-    return defaultExport(funcArg, 'forFirst');
-};
-exports.atEnd = (funcArg) => {
-    return defaultExport(funcArg, 'atEnd');
-};
-exports.default = defaultExport;
