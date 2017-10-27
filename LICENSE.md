@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2015 Push.Rocks
+Copyright (c) 2015 Push.Rocks (https://gitlab.com/pushrocks/gulp-function)
+Copyright (c) 2017 Chromatix Digital Agency (https://github.com/ChromatixAU/gulp-function-without-typings)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

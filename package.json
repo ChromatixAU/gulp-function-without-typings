@@ -1,15 +1,11 @@
 {
-  "name": "gulp-function",
+  "name": "gulp-function-without-typings",
   "version": "2.2.10",
-  "description": "accepts a function call as parameter to execute in gulp pipeline",
+  "description": "Accepts a function call as parameter to execute in gulp pipeline. This is a fork of gulp-function, without the @types dependencies.",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "scripts": {
-    "test": "(npmts)"
-  },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/pushrocks/gulp-function.git"
+    "url": "https://github.com/ChromatixAU/gulp-function-without-typings"
   },
   "keywords": [
     "gulpplugin",
@@ -19,17 +15,12 @@
   "author": "Lossless GmbH <office@lossless.com> (https://lossless.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/pushrocks/gulp-function/issues"
+    "url": "https://github.com/ChromatixAU/gulp-function-without-typings/issues"
   },
-  "homepage": "https://gitlab.com/pushrocks/gulp-function",
+  "homepage": "https://github.com/ChromatixAU/gulp-function-without-typings",
   "dependencies": {
-    "@types/through2": "^2.0.32",
-    "through2": "^2.0.3",
-    "typings-global": "^1.0.16"
+    "through2": "^2.0.3"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "smartgulp": "^1.0.1",
-    "tapbundle": "^1.0.10"
   }
 }
